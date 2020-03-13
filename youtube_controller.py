@@ -38,6 +38,30 @@ class SerialControllerInterface:
         elif data == b'0':
             logging.info("KEYUP A")
             pyautogui.keyUp(self.mapping.buttonskip['A'])
+        elif data == b'2':
+            logging.info("KEYDOWN A")
+            pyautogui.keyDown(self.mapping.buttonprev['B'])
+        elif data == b'3':
+            logging.info("KEYUP A")
+            pyautogui.keyUp(self.mapping.buttonprev['B'])
+        elif data == b'4':
+            logging.info("KEYDOWN A")
+            pyautogui.keyDown(self.mapping.buttonpause['C'])
+        elif data == b'5':
+            logging.info("KEYUP A")
+            pyautogui.keyUp(self.mapping.buttonpause['C'])
+        elif data == b'6':
+            logging.info("KEYDOWN A")
+            pyautogui.keyDown(self.mapping.buttonup['D'])
+        elif data == b'7':
+            logging.info("KEYUP A")
+            pyautogui.keyUp(self.mapping.buttonup['D'])
+        elif data == b'8':
+            logging.info("KEYDOWN A")
+            pyautogui.keyDown(self.mapping.buttondown['E'])
+        elif data == b'9':
+            logging.info("KEYUP A")
+            pyautogui.keyUp(self.mapping.buttondown['E'])
 
         self.incoming = self.ser.read()
 
