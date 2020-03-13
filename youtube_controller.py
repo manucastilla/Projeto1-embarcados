@@ -6,8 +6,11 @@ import logging
 
 class MyControllerMap:
     def __init__(self):
-        self.button = {'A': 'nexttrack'} # Fast forward (10 seg) pro Youtube
-        # self.button2 = {'B': 'RIGHT'} # Fast forward (10 seg) pro Youtube
+        self.buttonskip = {'A': 'nexttrack'} # Pular a música
+        self.buttonprev = {'B': 'prevtrack'} # Música anterior
+        self.buttonpause = {'C': 'playpause'} # Pause/Play
+        self.buttonup = {'D': 'volumeup'} # Aumentar volume
+        self.buttondown = {'E': 'volumedown'} # Diminuir volume
 
 class SerialControllerInterface:
     # Protocolo
@@ -31,14 +34,10 @@ class SerialControllerInterface:
 
         if data == b'1':
             logging.info("KEYDOWN A")
-            pyautogui.keyDown(self.mapping.button['A'])
-            # logging.info("KEYDOWN B")
-            # pyautogui.keyDown(self.mapping.button2['B'])
+            pyautogui.keyDown(self.mapping.buttonskip['A'])
         elif data == b'0':
             logging.info("KEYUP A")
-            pyautogui.keyUp(self.mapping.button['A'])
-            # logging.info("KEYUP B")
-            # pyautogui.keyUp(self.mapping.button2['B'])
+            pyautogui.keyUp(self.mapping.buttonskip['A'])
 
         self.incoming = self.ser.read()
 
@@ -48,13 +47,16 @@ class DummyControllerInterface:
         self.mapping = MyControllerMap()
 
     def update(self):
-        pyautogui.keyDown(self.mapping.button['A'])
-        pyautogui.keyDown(self.mapping.button2['B'])
-        time.sleep(0.1)
-        pyautogui.keyUp(self.mapping.button['A'])
-        pyautogui.keyUp(self.mapping.button2['B'])
-        logging.info("[Dummy] Pressed A button")
+        pyautogui.keyDown(self.mapping.buttonup['D'])
         time.sleep(1)
+        pyautogui.keyUp(self.mapping.buttonup['D'])
+        logging.info("[Dummy] Pressed A button")
+        time.sleep(10)
+        pyautogui.keyDown(self.mapping.buttondown['E'])
+        time.sleep(1)
+        pyautogui.keyUp(self.mapping.buttondown['E'])
+        logging.info("[Dummy] Pressed A button")
+        time.sleep(10)
 
 
 if __name__ == '__main__':
